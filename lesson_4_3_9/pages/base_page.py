@@ -13,7 +13,8 @@ class BasePage():
         self.browser.implicitly_wait(timeout)
 
     def go_to_login_page(self):
-        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK_INVALID), "Login link isn't presented"
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
         login_link.click()
 
     def should_be_login_link(self):
