@@ -1,5 +1,6 @@
 from .pages.product_page import ProductPage
 from .pages.login_page import LoginPage
+from .pages.basket_page import BasketPage
 import time
 import pytest
 
@@ -44,12 +45,23 @@ import pytest
 #     page.open()
 #     page.should_be_login_link()
 
-def test_guest_can_go_to_login_page_from_product_page(browser):
+# def test_guest_can_go_to_login_page_from_product_page(browser):
+#     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+#     page = ProductPage(browser, link)
+#     page.open()
+#     page.go_to_login_page() # 2й способ перехода когда LoginPage инициализируется в теле теста
+#     login_page = LoginPage(browser, browser.current_url) # 2й способ
+#     login_page.should_be_login_page()
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
-    page.go_to_login_page() # 2й способ перехода когда LoginPage инициализируется в теле теста
-    login_page = LoginPage(browser, browser.current_url) # 2й способ
-    login_page.should_be_login_page()
+    page.go_to_basket_page_from_header()  # 2й способ перехода когда LoginPage инициализируется в теле теста
+    basket_page = BasketPage(browser, browser.current_url)  # 2й способ
+    basket_page.basket_should_be_empty()
+    basket_page.text_basket_is_empty_should_be_present()
+
+
 
     # pytest -s -v --tb=line --language=en lesson_4_3_9/test_product_page.py

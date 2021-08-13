@@ -17,6 +17,11 @@ class BasePage():
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
         login_link.click()
 
+    def go_to_basket_page_from_header(self):
+        assert self.is_element_present(*BasePageLocators.BASKET_BUTTON_HEADER), "Basket button isn't presented"
+        login_link = self.browser.find_element(*BasePageLocators.BASKET_BUTTON_HEADER)
+        login_link.click()
+
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link isn't presented"
 
